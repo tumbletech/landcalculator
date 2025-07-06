@@ -34,9 +34,9 @@
         margin: 0;
         padding: 0;
         height: 100vh;
+        overflow: hidden;
         display: flex;
         flex-direction: column;
-        overflow: hidden;
       }
 
       #mapWrapper {
@@ -48,11 +48,12 @@
       }
 
       #formScrollableArea {
-        flex-grow: 1;
+        height: 60vh;           /* fills the rest below the map */
         overflow-y: auto;
         padding: 1rem;
         background: #f8f9fa;
       }
+
     </style>
   
 
@@ -193,39 +194,73 @@
           </div>
         </div>
       </div>
-    </div>
+    
+
+      <hr />
+        <div class="mb-3">
+          <label class="form-label fw-bold">Total Site Development Cost</label>
+          <input type="text" id="siteDevTotalCost" class="form-control readonly-input fw-bold" readonly />
+        </div>
+
+        <div class="mb-4">
+          <button class="btn btn-dark" style="max-width: 180px;" onclick="saveSiteDevCost()">Save</button>
+        </div>
 
 
-      <div id="totalResult" class="alert alert-success d-none"></div>
-    </div>
+        <div id="totalResult" class="alert alert-success d-none"></div>
+      
 
-    <div class="mt-4">
-    <div class="d-grid gap-3">
-      <a href="contact-lht.html" class="btn btn-outline-dark">
-        💬 Talk to an LHT Expert
-      </a>
-      <a href="00b.dashboard.html" class="btn btn-dark">
-        ➕ Proceed with Estimating Other Items
-      </a>
+        <!-- Total Section (Inside the scrollable area) -->
+        <hr />
+          
+
+          <div class="d-flex justify-content-between gap-2 mb-3">
+            <a href="07landacquisitioncost.html" class="btn btn-outline-secondary w-100">⬅️ Previous Step</a>
+            <a href="09utilityconnectioncost.html" class="btn btn-outline-secondary w-100">Next Step ➡️</a>
+          </div>
+
+          <div class="d-grid gap-2 mb-5">
+            <a href="00b.dashboard.html" class="btn btn-dark">🏠 Back to Cost Dashboard</a>
+            <a href="contact-lht.html" class="btn btn-outline-dark">✅ Review Your Estimate with LHT</a>
+          </div>
+          </div> <!-- This closes #formScrollableArea -->
     </div>
-  </div>
 
     <script>
-      document.getElementById('landPurchaseForm').addEventListener('submit', function (e) {
-        e.preventDefault();
+      function calculateSiteDevCost() {
+        const fence = (parseFloat(document.getElementById("fenceLength").value) || 0) *
+                      (parseFloat(document.getElementById("fenceUnitCost").value) || 0);
 
-        const inputs = this.querySelectorAll('input');
-        let total = 0;
+        const clearing = (parseFloat(document.getElementById("clearArea").value) || 0) *
+                        (parseFloat(document.getElementById("clearUnitCost").value) || 0);
 
-        inputs.forEach(input => {
-          const val = parseFloat(input.value);
-          if (!isNaN(val)) total += val;
-        });
+        const driveway = (parseFloat(document.getElementById("drivewayLength").value) || 0) *
+                        (parseFloat(document.getElementById("drivewayWidth").value) || 0) *
+                        (parseFloat(document.getElementById("drivewayUnitCost").value) || 0);
 
-        document.getElementById('totalResult').textContent = `Estimated Total Cost: $${total.toLocaleString()}`;
-        document.getElementById('totalResult').classList.remove('d-none');
-      });
+        const gate = (parseFloat(document.getElementById("gateWidth").value) || 0) *
+                    (parseFloat(document.getElementById("gateHeight").value) || 0) *
+                    (parseFloat(document.getElementById("gateUnitCost").value) || 0);
+
+        document.getElementById("fenceSubtotal").value = `$${fence.toFixed(2)}`;
+        document.getElementById("clearSubtotal").value = `$${clearing.toFixed(2)}`;
+        document.getElementById("drivewaySubtotal").value = `$${driveway.toFixed(2)}`;
+        document.getElementById("gateSubtotal").value = `$${gate.toFixed(2)}`;
+
+        const total = fence + clearing + driveway + gate;
+        document.getElementById("siteDevTotalCost").value = `$${total.toLocaleString(undefined, { minimumFractionDigits: 2 })}`;
+        localStorage.setItem("siteDevelopmentCost", total.toFixed(2));
+      }
+
+      function saveSiteDevCost() {
+        alert("Site Development Cost saved!");
+        window.location.href = "03utilityconnectioncost.html";
+      }
+
+      document.addEventListener("input", calculateSiteDevCost);
+      document.addEventListener("DOMContentLoaded", calculateSiteDevCost);
     </script>
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 

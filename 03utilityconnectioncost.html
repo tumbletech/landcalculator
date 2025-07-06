@@ -178,36 +178,30 @@
       </div>
     </div>
 
-    <!-- Total Utility Cost -->
-    <div class="border-top pt-4">
-      <h5 class="fw-bold">Total Utility Cost: <span id="totalUtilityCost">$0.00</span></h5>
+    <hr />
+        <div class="mb-3">
+            <label class="form-label fw-bold">Total Utility Connection Cost</label>
+            <input type="text" id="totalCost" class="form-control readonly-input fw-bold" readonly />
+          </div>
+
+        <button id="totalResult" class="btn btn-dark" style="max-width: 180px; margin: 20px;" onclick="saveAndContinue()">Save</button>
     </div>
-  
-    <div>
-      <button class="btn btn-dark" onclick="saveAndContinue()">Continue</button>
+
+    <!-- Total Section (Inside the scrollable area) -->
+        <hr />      
+
+          <div class="d-flex justify-content-between gap-2 mb-3">
+            <a href="./02sitedevelopmentcost.html" class="btn btn-outline-secondary w-100">⬅️ Previous Step</a>
+            <a href="./04buildingprepartioncost.html" class="btn btn-outline-secondary w-100">Next Step ➡️</a>
+          </div>
+
+          <div class="d-grid gap-2 mb-5">
+            <a href="00b.dashboard.html" class="btn btn-dark">🏠 Back to Cost Dashboard</a>
+            <a href="contact-lht.html" class="btn btn-outline-dark">✅ Review Your Estimate with LHT</a>
+          </div>
+          </div> <!-- This closes #formScrollableArea -->
     </div>
   </div>
-
-      <!-- Total -->
-      <div class="my-4">
-          <button type="submit" class="btn btn-dark w-100">Calculate Total</button>
-      </div>
-
-      </form>
-
-      <div id="totalResult" class="alert alert-success d-none"></div>
-    </div>
-
-      <div class="mt-4">
-      <div class="d-grid gap-3">
-          <a href="contact-lht.html" class="btn btn-outline-dark">
-          💬 Talk to an LHT Expert
-          </a>
-          <a href="00b.dashboard.html" class="btn btn-dark">
-          ➕ Proceed with Estimating Other Items
-          </a>
-      </div>
-      </div>
 
     <script>
       function formatUSD(num) {

@@ -87,17 +87,29 @@
       </div>
 
       <!-- Totals -->
-      <div class="border-top pt-4">
-        <h5 class="fw-bold">Total Loan Interest: <span id="loanInterestTotal">$0.00</span></h5>
-        <h5 class="fw-bold">Total Holding Cost: <span id="holdingTotal">$0.00</span></h5>
-        <h4 class="fw-bold mt-3">Grand Total: <span id="financeGrandTotal">$0.00</span></h4>
-      </div>
+      <hr />
+        <div class="mb-3">
+            <label class="form-label fw-bold">Total Finacing and Holding Cost</label>
+            <input type="text" id="totalCost" class="form-control readonly-input fw-bold" readonly />
+        </div>
 
-      <div class="mt-4">
-        <button class="btn btn-dark" onclick="saveAndContinue()">Save & Continue</button>
-      </div>
-    </div>
-  </div>
+        <button id="totalResult" class="btn btn-dark" style="max-width: 180px; margin: 20px;" onclick="saveAndContinue()">Save</button>
+        </div>
+
+        <!-- Total Section (Inside the scrollable area) -->
+            <hr />      
+
+              <div class="d-flex justify-content-between gap-2 mb-3">
+                <a href="./05zoningandlegal.html" class="btn btn-outline-secondary w-100">⬅️ Previous Step</a>
+                <a href="./07buildingconstructionestimate.html" class="btn btn-outline-secondary w-100">Next Step ➡️</a>
+              </div>
+
+              <div class="d-grid gap-2 mb-5">
+                <a href="00b.dashboard.html" class="btn btn-dark">🏠 Back to Cost Dashboard</a>
+                <a href="contact-lht.html" class="btn btn-outline-dark">✅ Review Your Estimate with LHT</a>
+              </div>
+              </div> <!-- This closes #formScrollableArea -->
+        </div>
 
   <script>
     function toggleLoanSection(el) {
